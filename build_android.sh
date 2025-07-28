@@ -42,7 +42,7 @@ echo "🐍 Installing Python dependencies..."
 python3 -m pip install --upgrade pip setuptools wheel
 check_success "Pip upgrade"
 
-python3 -m pip install \
+python3 -m pip install --user \
     buildozer==1.5.0 \
     cython==3.0.11 \
     kivy==2.3.1 \
@@ -50,8 +50,18 @@ python3 -m pip install \
     plyer
 check_success "Python dependencies installation"
 
+# Add user bin to PATH for buildozer
+export PATH=$PATH:$HOME/.local/bin
+
 # Verify buildozer installation
 echo "🔧 Verifying buildozer installation..."
+which buildozer
+if [ $? -ne 0 ]; then
+    echo "⚠️ Buildozer not in PATH, trying alternative installation..."
+    python3 -m pip install --force-reinstall buildozer==1.5.0
+    export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
+fi
+
 buildozer --version
 check_success "Buildozer verification"
 
