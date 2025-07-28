@@ -15,7 +15,7 @@ version = 1.0
 #version.filename = %(source.dir)s/main.py
 
 # Application requirements
-requirements = python3,kivy,kivymd,requests,numpy,pandas,websocket-client,certifi
+requirements = python3,kivy==2.3.1,plyer,requests,websocket-client,pandas,numpy,cython
 
 # Android specific
 android.permissions = INTERNET,ACCESS_NETWORK_STATE,WAKE_LOCK,VIBRATE
